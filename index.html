@@ -518,18 +518,18 @@
   }
 
   // Nav links
-  document.getElementById('nav-home').addEventListener('click', function() { showPage('home'); });
-  document.getElementById('nav-events').addEventListener('click', function() { showPage('events'); });
-  document.getElementById('nav-contact').addEventListener('click', function() { showPage('contact'); });
+  document.getElementById('nav-home').addEventListener('click', function(e) { e.preventDefault(); showPage('home'); });
+  document.getElementById('nav-events').addEventListener('click', function(e) { e.preventDefault(); showPage('events'); });
+  document.getElementById('nav-contact').addEventListener('click', function(e) { e.preventDefault(); showPage('contact'); });
 
   // Logo
-  document.getElementById('logo-home').addEventListener('click', function() { showPage('home'); });
+  document.getElementById('logo-home').addEventListener('click', function(e) { e.preventDefault(); showPage('home'); });
 
-// Footer nav links
+  // Footer nav links
   var footerNavs = document.querySelectorAll('.footer-nav');
   for (var i = 0; i < footerNavs.length; i++) {
     footerNavs[i].addEventListener('click', (function(target) {
-      return function() { showPage(target); };
+      return function(e) { e.preventDefault(); showPage(target); };
     })(footerNavs[i].getAttribute('data-target')));
   }
 
@@ -538,4 +538,10 @@
     var fname = document.getElementById('fname').value.trim();
     var email = document.getElementById('email').value.trim();
     var message = document.getElementById('message').value.trim();
-    if (!fname || !email || !message) { aler
+    if (!fname || !email || !message) { alert('Please fill in your name, email, and message.'); return; }
+    document.getElementById('form-success').classList.add('show');
+    document.getElementById('submit-btn').style.display = 'none';
+  });
+</script>
+</body>
+</html>
