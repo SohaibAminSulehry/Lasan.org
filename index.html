@@ -29,10 +29,10 @@
       position:fixed; top:0; left:0; right:0; z-index:100;
       background:rgba(14,54,34,0.97); backdrop-filter:blur(12px);
       border-bottom:1px solid var(--gold);
-      padding:6px 5%; display:flex; align-items:center; justify-content:space-between; min-height:80px; overflow:visible;
+      padding:10px 5%; display:flex; align-items:center; justify-content:space-between; box-sizing:border-box;
     }
-    .nav-logo { display:flex; align-items:center; gap:14px; cursor:pointer; flex-shrink:0; overflow:visible; }
-    .nav-logo img { width:64px; height:64px; object-fit:contain; flex-shrink:0; display:block; overflow:visible; }
+    .nav-logo { display:flex; align-items:center; gap:14px; cursor:pointer; flex-shrink:0; }
+    .nav-logo img { width:52px; height:52px; object-fit:contain; object-position:center; flex-shrink:0; display:block; }
     .nav-logo-text .main { font-family:'Cormorant Garamond',serif; font-size:1.2rem; font-weight:600; color:var(--white); letter-spacing:0.04em; line-height:1.1; display:block; }
     .nav-logo-text .arabic { font-family:'Amiri',serif; font-size:0.85rem; color:var(--gold); display:block; }
     .nav-links { display:flex; gap:8px; list-style:none; }
@@ -51,7 +51,7 @@
     .hero {
       height:80vh; background:linear-gradient(160deg,var(--emerald-dark) 0%,var(--emerald) 50%,#1e6b42 100%);
       display:flex; flex-direction:column; align-items:center; justify-content:center;
-      text-align:center; padding:0 6%; position:relative; overflow:hidden;
+      text-align:center; padding:80px 6% 0; position:relative; overflow:hidden;
     }
     .hero-pattern {
       position:absolute; inset:0; opacity:0.06;
