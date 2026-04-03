@@ -207,16 +207,30 @@
     .footer-bottom { border-top:1px solid rgba(255,255,255,0.08); padding-top:24px; }
     .footer-bottom p { font-size:0.78rem; color:rgba(255,255,255,0.3); }
 
-    /* MOBILE */
+    /* HAMBURGER */
+    .hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; padding:6px; background:none; border:none; z-index:200; }
+    .hamburger span { display:block; width:24px; height:2px; background:var(--white); border-radius:2px; transition:all 0.3s; }
+    .hamburger.open span:nth-child(1) { transform:translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity:0; }
+    .hamburger.open span:nth-child(3) { transform:translateY(-7px) rotate(-45deg); }
+
     @media(max-width:768px){
       .nav-logo img { width:44px; height:44px; }
       .nav-logo-text .main { font-size:1rem; }
       .nav-logo-text .arabic { font-size:0.75rem; }
+      .hamburger { display:flex; }
+      .nav-links {
+        display:none; flex-direction:column; gap:0;
+        position:fixed; top:var(--nav-height); left:0; right:0;
+        background:rgba(14,54,34,0.98); padding:16px 0;
+        border-bottom:1px solid var(--gold); z-index:99;
+      }
+      .nav-links.open { display:flex; }
+      .nav-links li a { padding:14px 24px; border-radius:0; font-size:0.95rem; border-bottom:1px solid rgba(201,168,76,0.1); }
+      .nav-links li:last-child a { border-bottom:none; }
       .contact-layout{grid-template-columns:1fr}
       .form-row{grid-template-columns:1fr}
       .footer-inner{grid-template-columns:1fr}
-      .stats-section{grid-template-columns:1fr 1fr}
-      .stat-divider{display:none}
     }
     @media(max-width:480px){
       .hero-cta-group{flex-direction:column;align-items:center}
@@ -234,7 +248,10 @@
       <span class="arabic">عالمی دعوتِ لاثانی</span>
     </div>
   </div>
-  <ul class="nav-links">
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+  <ul class="nav-links" id="nav-links-menu">
     <li><a id="nav-home" class="active">Home</a></li>
     <li><a id="nav-events">Events</a></li>
     <li><a id="nav-contact">Contact</a></li>
@@ -511,6 +528,23 @@
 </div>
 
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  // Hamburger menu toggle
+  var hamburger = document.getElementById('hamburger');
+  var navMenu = document.getElementById('nav-links-menu');
+  hamburger.addEventListener('click', function() {
+    hamburger.classList.toggle('open');
+    navMenu.classList.toggle('open');
+  });
+
+  // Close menu when a nav link is clicked
+  var navItems = navMenu.querySelectorAll('li a:not([href])');
+  for (var i = 0; i < navItems.length; i++) {
+    navItems[i].addEventListener('click', function() {
+      hamburger.classList.remove('open');
+      navMenu.classList.remove('open');
+    });
+  }
+
   function showPage(page) {
     var pages = document.querySelectorAll('.page');
     for (var i = 0; i < pages.length; i++) pages[i].classList.remove('active');
